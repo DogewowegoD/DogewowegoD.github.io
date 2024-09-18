@@ -79,7 +79,7 @@ $(document).ready(function () {
             const paginationContainer = $('#pagination');
             paginationContainer.empty();
 
-            const maxVisiblePages = $(window).width() <= 768 ? maxVisiblePagesMobile : maxVisiblePagesDesktop;  // Check if it's mobile
+            const maxVisiblePages = $(window).width() <= 1000 ? maxVisiblePagesMobile : maxVisiblePagesDesktop;  // Check if it's mobile
 
             let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
             let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
