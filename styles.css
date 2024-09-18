@@ -218,9 +218,48 @@ nav.site ul li {
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);  /* Set 10 columns by default on larger screens */
+    grid-template-columns: repeat(10, 1fr);  /* 10 cards per row for larger screens */
     grid-gap: 10px 16px;
     justify-content: center;
+}
+
+/* Mobile layout using flexbox */
+@media screen and (max-width: 768px) {
+    .cards-grid {
+        display: flex;
+        flex-wrap: wrap;  /* Allow cards to wrap */
+        justify-content: space-between;  /* Evenly space out cards */
+    }
+
+    .card {
+        width: calc(50% - 10px);  /* Two cards per row with some space between */
+        padding: 5px;
+        margin-bottom: 10px;  /* Add space between rows */
+        background-color: transparent;
+        border: none;
+        text-align: center;
+    }
+
+    .card img {
+        max-width: 100%;  /* Ensure images scale to fit */
+        height: auto;
+    }
+
+    .card h3, .card p {
+        font-size: 0.6em;  /* Smaller text size for mobile */
+        margin: 0;
+        padding: 2px 0;
+    }
+
+    .page-btn {
+        padding: 6px;
+        font-size: 0.6em;  /* Smaller pagination buttons */
+        width: 30px;  /* Consistent button width */
+    }
+
+    .modal-card {
+        width: 90%;  /* Ensure the modal fits the screen */
+    }
 }
 
 .card {
@@ -340,33 +379,4 @@ nav.site ul li {
 .close-modal:hover {
     background-color: #fff;
     color: #00dd00;
-}
-
-/* Mobile styles */
-@media screen and (max-width: 768px) {
-    .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));  /* Force two cards per row */
-        grid-gap: 8px;  /* Adjust spacing between cards */
-        justify-items: center;  /* Center the cards within the grid */
-    }
-
-    .card {
-        padding: 5px;  /* Reduce padding for smaller screens */
-        margin: 0;  /* Remove extra margin */
-    }
-
-    .card h3, .card p {
-        font-size: 0.4em;  /* Further reduce text size */
-    }
-
-    .page-btn {
-        padding: 5px;
-        font-size: 0.5em;  /* Smaller pagination buttons */
-        width: 30px;  /* Adjust button width for mobile */
-    }
-
-    .modal-card {
-        width: 95%;  /* Fit modal within mobile screen width */
-    }
 }
