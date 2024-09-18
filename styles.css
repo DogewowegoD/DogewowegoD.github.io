@@ -254,8 +254,8 @@ nav.site ul li {
 
     .page-btn {
         padding: 6px;
-        font-size: 0.7em;  /* Smaller pagination buttons */
-        width: 30px;  /* Consistent button width */
+        font-size: 0.3em;  /* Smaller pagination buttons */
+        width: 20px;  /* Consistent button width */
     }
 
     .modal-card {
