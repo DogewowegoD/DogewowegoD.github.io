@@ -218,7 +218,7 @@ nav.site ul li {
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(10, 136px);
+    grid-template-columns: repeat(10, 1fr);  /* Set 10 columns by default on larger screens */
     grid-gap: 10px 16px;
     justify-content: center;
 }
@@ -252,6 +252,7 @@ nav.site ul li {
     transition: opacity 0.3s;
     margin: 0;
     font-weight: bold;  /* Make the text bold */
+	font-size: 0.8em;
 }
 
 .card h3 {
@@ -279,8 +280,8 @@ nav.site ul li {
     margin: 0 5px;
     cursor: pointer;
     font-family: 'Verdana', Courier;
-    font-size: 0.3em;
-    width: 50px;  /* Set a fixed width for consistency */
+    font-size: 0.45em;
+    width: 60px;  /* Set a fixed width for consistency */
     text-align: center;  /* Ensure the text is centered */
 	font-weight: bold;
 }
@@ -339,4 +340,26 @@ nav.site ul li {
 .close-modal:hover {
     background-color: #fff;
     color: #00dd00;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));  /* Smaller cards on mobile */
+        grid-gap: 8px 12px;  /* Adjust spacing */
+    }
+
+    .card h3, .card p {
+        font-size: 0.7em;  /* Smaller text size on mobile */
+    }
+
+    .page-btn {
+        padding: 8px;
+        font-size: 0.8em;
+        width: 35px;  /* Slightly smaller buttons */
+    }
+
+    .modal-card {
+        width: 95%;  /* Fit within mobile screen width */
+    }
 }
