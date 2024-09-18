@@ -350,12 +350,12 @@ nav.site ul li {
     }
 
     .card h3, .card p {
-        font-size: 0.2em;  /* Smaller text size on mobile */
+        font-size: 0.05em;  /* Smaller text size on mobile */
     }
 
     .page-btn {
         padding: 8px;
-        font-size: 0.2em;
+        font-size: 0.05em;
         width: 35px;  /* Slightly smaller buttons */
     }
 
