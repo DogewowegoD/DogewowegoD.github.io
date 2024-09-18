@@ -216,6 +216,7 @@ nav.site ul li {
     position: relative;
 }
 
+/* General grid layout for desktop */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);  /* 10 cards per row for larger screens */
@@ -227,12 +228,12 @@ nav.site ul li {
 @media screen and (max-width: 768px) {
     .cards-grid {
         display: flex;
-        flex-wrap: wrap;  /* Allow cards to wrap */
-        justify-content: space-between;  /* Evenly space out cards */
+        flex-wrap: wrap;  /* Allow cards to wrap onto the next line */
+        justify-content: space-between;  /* Distribute space evenly between cards */
     }
 
     .card {
-        width: calc(50% - 10px);  /* Two cards per row with some space between */
+        width: 48%;  /* Ensure two cards per line with space */
         padding: 5px;
         margin-bottom: 10px;  /* Add space between rows */
         background-color: transparent;
@@ -241,24 +242,24 @@ nav.site ul li {
     }
 
     .card img {
-        max-width: 100%;  /* Ensure images scale to fit */
+        max-width: 100%;  /* Ensure images scale to fit card width */
         height: auto;
     }
 
     .card h3, .card p {
-        font-size: 0.6em;  /* Smaller text size for mobile */
+        font-size: 0.5em;  /* Smaller text size for mobile */
         margin: 0;
         padding: 2px 0;
     }
 
     .page-btn {
         padding: 6px;
-        font-size: 0.6em;  /* Smaller pagination buttons */
+        font-size: 0.7em;  /* Smaller pagination buttons */
         width: 30px;  /* Consistent button width */
     }
 
     .modal-card {
-        width: 90%;  /* Ensure the modal fits the screen */
+        width: 90%;  /* Ensure the modal fits within mobile screens */
     }
 }
 
