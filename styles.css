@@ -308,7 +308,7 @@ nav.site ul li {
 }
 
 .pagination-container {
-    margin-top: 20px;  /* Space between the cards and pagination */
+    margin-top: 20px;
     text-align: center;
 }
 
@@ -320,10 +320,9 @@ nav.site ul li {
     margin: 0 5px;
     cursor: pointer;
     font-family: 'Verdana', Courier;
-    font-size: 0.45em;
-    width: 60px;  /* Set a fixed width for consistency */
-    text-align: center;  /* Ensure the text is centered */
-	font-weight: bold;
+    font-size: 0.9em;
+    width: 40px;
+    text-align: center;
 }
 
 .page-btn:hover {

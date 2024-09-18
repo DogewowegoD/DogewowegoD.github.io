@@ -1,119 +1,126 @@
 $(document).ready(function () {
-  const cardsPerPage = 100;
-  let currentPage = 1;
-  let totalPages = 0;
-  const maxVisiblePages = 10;  // Number of visible page buttons
+    const cardsPerPage = 100;
+    let currentPage = 1;
+    let totalPages = 0;
 
-  const baseUrl1 = 'https://ik.imagekit.io/Cartel/1/';
-  const baseUrl2 = 'https://ik.imagekit.io/Cartel/2/';
+    const maxVisiblePagesDesktop = 10;  // Number of visible pages on desktop
+    const maxVisiblePagesMobile = 3;  // Number of visible pages on mobile
 
-  // Function to open the modal with the clicked card's data
-  function openModal(item) {
-      const modalHtml = `
-          <div class="modal-overlay"></div>
-          <div class="modal-card">
-              <b><h3>${item.name}</h3></b>
-              <img src="${item.imageUrl}" alt="${item.name}" width="272" height="360">
-              <p>Rank: ${item.rank}</p>
-              <button class="close-modal">Close</button>
-          </div>
-      `;
-      $('body').append(modalHtml);
+    const baseUrl1 = 'https://ik.imagekit.io/Cartel/1/';
+    const baseUrl2 = 'https://ik.imagekit.io/Cartel/2/';
 
-      // Close the modal when clicking the close button or the overlay
-      $('.close-modal, .modal-overlay').click(function () {
-          $('.modal-card, .modal-overlay').remove();
-      });
-  }
+    // Function to open the modal with the clicked card's data
+    function openModal(item) {
+        const modalHtml = `
+            <div class="modal-overlay"></div>
+            <div class="modal-card">
+                <h3>${item.name}</h3>
+                <img src="${item.imageUrl}" alt="${item.name}" width="272" height="360">
+                <p>Rank: ${item.rank}</p>
+                <button class="close-modal">Close</button>
+            </div>
+        `;
+        $('body').append(modalHtml);
 
-  // Fetch the external JSON file
-  $.getJSON('json/sorteddata.json', function (data) {
-      data.sort((a, b) => a.rank - b.rank);
-      totalPages = Math.ceil(data.length / cardsPerPage);
+        // Close the modal when clicking the close button or the overlay
+        $('.close-modal, .modal-overlay').click(function () {
+            $('.modal-card, .modal-overlay').remove();
+        });
+    }
 
-      function renderPage(page) {
-          const start = (page - 1) * cardsPerPage;
-          const end = start + cardsPerPage;
-          const paginatedData = data.slice(start, end);
-          const cardsGrid = $('#cardsGrid');
-          cardsGrid.empty();
+    // Fetch the external JSON file
+    $.getJSON('json/sorteddata.json', function (data) {
+        data.sort((a, b) => a.rank - b.rank);
+        totalPages = Math.ceil(data.length / cardsPerPage);
 
-          paginatedData.forEach(item => {
-              let imageUrl;
-              const cleanImageName = item.image.replace(/^\//, '');
-              const imageNumber = parseInt(cleanImageName.replace('.png', ''), 10);
+        function renderPage(page) {
+            const start = (page - 1) * cardsPerPage;
+            const end = start + cardsPerPage;
+            const paginatedData = data.slice(start, end);
+            const cardsGrid = $('#cardsGrid');
+            cardsGrid.empty();
 
-              if (imageNumber > 0 && imageNumber <= 5000) {
-                  imageUrl = `${baseUrl1}${cleanImageName}`;
-              } else if (imageNumber > 5000) {
-                  imageUrl = `${baseUrl2}${cleanImageName}`;
-              }
+            paginatedData.forEach(item => {
+                let imageUrl;
+                const cleanImageName = item.image.replace(/^\//, '');
+                const imageNumber = parseInt(cleanImageName.replace('.png', ''), 10);
 
-              const cardHtml = `
-                  <div class="card" data-image-url="${imageUrl}" data-name="${item.name}" data-rank="${item.rank}">
-                      <h3>${item.name}</h3>
-                      <img src="${imageUrl}" alt="${item.name}" width="136" height="180">
-                      <p>Rank: ${item.rank}</p>
-                  </div>
-              `;
-              cardsGrid.append(cardHtml);
-          });
+                if (imageNumber > 0 && imageNumber <= 5000) {
+                    imageUrl = `${baseUrl1}${cleanImageName}`;
+                } else if (imageNumber > 5000) {
+                    imageUrl = `${baseUrl2}${cleanImageName}`;
+                }
 
-          // Add click event to open modal when a card is clicked
-          $('.card').off('click').on('click', function () {
-              const cardData = {
-                  name: $(this).data('name'),
-                  rank: $(this).data('rank'),
-                  imageUrl: $(this).data('image-url')
-              };
-              openModal(cardData);
-          });
+                const cardHtml = `
+                    <div class="card" data-image-url="${imageUrl}" data-name="${item.name}" data-rank="${item.rank}">
+                        <h3>${item.name}</h3>
+                        <img src="${imageUrl}" alt="${item.name}" width="136" height="180">
+                        <p>Rank: ${item.rank}</p>
+                    </div>
+                `;
+                cardsGrid.append(cardHtml);
+            });
 
-          renderPaginationControls();
-      }
+            // Add click event to open modal when a card is clicked
+            $('.card').off('click').on('click', function () {
+                const cardData = {
+                    name: $(this).data('name'),
+                    rank: $(this).data('rank'),
+                    imageUrl: $(this).data('image-url')
+                };
+                openModal(cardData);
+            });
 
-      // Function to render pagination controls
-      function renderPaginationControls() {
-          const paginationContainer = $('#pagination');
-          paginationContainer.empty();
+            renderPaginationControls();
+        }
 
-          let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-          let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        // Function to render pagination controls
+        function renderPaginationControls() {
+            const paginationContainer = $('#pagination');
+            paginationContainer.empty();
 
-          // Adjust start and end if near the limits
-          if (currentPage > totalPages - Math.floor(maxVisiblePages / 2)) {
-              startPage = Math.max(1, totalPages - maxVisiblePages + 1);
-              endPage = totalPages;
-          }
+            const maxVisiblePages = $(window).width() <= 768 ? maxVisiblePagesMobile : maxVisiblePagesDesktop;  // Check if it's mobile
 
-          // Previous button
-          if (currentPage > 1) {
-              paginationContainer.append(`<button class="page-btn" data-page="${currentPage - 1}">Prev</button>`);
-          }
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
-          // Page number buttons
-          for (let i = startPage; i <= endPage; i++) {
-              const activeClass = (i === currentPage) ? 'active' : '';
-              paginationContainer.append(`
-                  <button class="page-btn ${activeClass}" data-page="${i}">${i}</button>
-              `);
-          }
+            // Adjust start and end if near the limits
+            if (currentPage > totalPages - Math.floor(maxVisiblePages / 2)) {
+                startPage = Math.max(1, totalPages - maxVisiblePages + 1);
+                endPage = totalPages;
+            }
 
-          // Next button
-          if (currentPage < totalPages) {
-              paginationContainer.append(`<button class="page-btn" data-page="${currentPage + 1}">Next</button>`);
-          }
+            // Previous button
+            if (currentPage > 1) {
+                paginationContainer.append(`<button class="page-btn" data-page="${currentPage - 1}">Prev</button>`);
+            }
 
-          // Add click event to page buttons
-          $('.page-btn').off('click').on('click', function () {
-              currentPage = $(this).data('page');
-              renderPage(currentPage);
-          });
-      }
+            // Page number buttons
+            for (let i = startPage; i <= endPage; i++) {
+                const activeClass = (i === currentPage) ? 'active' : '';
+                paginationContainer.append(`
+                    <button class="page-btn ${activeClass}" data-page="${i}">${i}</button>
+                `);
+            }
 
-      // Initial render
-      renderPage(currentPage);
-  }).fail(function () {
-      console.error("Failed to load JSON data.");
-  });
+            // Next button
+            if (currentPage < totalPages) {
+                paginationContainer.append(`<button class="page-btn" data-page="${currentPage + 1}">Next</button>`);
+            }
+
+            // Add click event to page buttons
+            $('.page-btn').off('click').on('click', function () {
+                currentPage = $(this).data('page');
+                renderPage(currentPage);
+            });
+        }
+
+        // Initial render
+        renderPage(currentPage);
+
+        // Re-render pagination when window is resized
+        $(window).resize(renderPaginationControls);
+    }).fail(function () {
+        console.error("Failed to load JSON data.");
+    });
 });
