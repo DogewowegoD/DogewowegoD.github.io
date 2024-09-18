@@ -4,7 +4,7 @@ $(document).ready(function () {
     let totalPages = 0;
 
     const maxVisiblePagesDesktop = 10;  // Number of visible pages on desktop
-    const maxVisiblePagesMobile = 3;  // Number of visible pages on mobile
+    const maxVisiblePagesMobile = 3;  // Limit to 3 visible pages on mobile
 
     const baseUrl1 = 'https://ik.imagekit.io/Cartel/1/';
     const baseUrl2 = 'https://ik.imagekit.io/Cartel/2/';
@@ -79,13 +79,16 @@ $(document).ready(function () {
             const paginationContainer = $('#pagination');
             paginationContainer.empty();
 
-            const maxVisiblePages = $(window).width() <= 768 ? maxVisiblePagesMobile : maxVisiblePagesDesktop;  // Check if it's mobile
+            const maxVisiblePages = $(window).width() <= 768 ? maxVisiblePagesMobile : maxVisiblePagesDesktop;
 
             let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
             let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
-            // Adjust start and end if near the limits
-            if (currentPage > totalPages - Math.floor(maxVisiblePages / 2)) {
+            // Adjust if the current page is close to the start or end
+            if (currentPage <= Math.floor(maxVisiblePages / 2)) {
+                startPage = 1;
+                endPage = maxVisiblePages;
+            } else if (currentPage >= totalPages - Math.floor(maxVisiblePages / 2)) {
                 startPage = Math.max(1, totalPages - maxVisiblePages + 1);
                 endPage = totalPages;
             }
@@ -95,8 +98,8 @@ $(document).ready(function () {
                 paginationContainer.append(`<button class="page-btn" data-page="${currentPage - 1}">Prev</button>`);
             }
 
-            // Page number buttons
-            for (let i = startPage; i <= endPage; i++) {
+            // Page number buttons (limit to 3 on mobile)
+            for (let i = startPage; i <= endPage && i <= totalPages; i++) {
                 const activeClass = (i === currentPage) ? 'active' : '';
                 paginationContainer.append(`
                     <button class="page-btn ${activeClass}" data-page="${i}">${i}</button>
