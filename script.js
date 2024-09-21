@@ -72,7 +72,7 @@ $(document).ready(function () {
         renderCards(allData);
 
         // Render pagination after fetching data
-        renderPaginationControls(allData.length);
+        renderPaginationControls();
     });
 
     // Search functionality (dynamic filtering)
@@ -83,30 +83,18 @@ $(document).ready(function () {
         if (searchTerm !== "") {
             const filteredData = allData.filter(item => item.name.includes(`#${searchTerm}`));
             renderCards(filteredData);
-            
-            // Update pagination based on search results
-            renderPaginationControls(filteredData.length);
         } else {
             // If search is empty, show all cards again
             renderCards(allData);
-
-            // Reset pagination to full data set
-            renderPaginationControls(allData.length);
         }
     });
 
     // Pagination logic (adjusts for mobile and desktop)
-    function renderPaginationControls(totalItems) {
+    function renderPaginationControls() {
         const paginationContainer = $('#pagination');
         paginationContainer.empty();
 
-        // Hide pagination if less than 100 results
-        if (totalItems <= cardsPerPage) {
-            return;  // No pagination needed
-        }
-
         const maxVisiblePages = $(window).width() <= 768 ? 3 : 10;  // Mobile: 3 visible, Desktop: 10 visible
-        totalPages = Math.ceil(totalItems / cardsPerPage);
         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
@@ -153,11 +141,9 @@ $(document).ready(function () {
         renderCards(paginatedData);
 
         // Update pagination controls
-        renderPaginationControls(allData.length);
+        renderPaginationControls();
     }
 
     // Re-render pagination when window is resized
-    $(window).resize(function () {
-        renderPaginationControls(allData.length);
-    });
+    $(window).resize(renderPaginationControls);
 });
