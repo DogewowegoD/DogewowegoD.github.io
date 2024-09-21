@@ -389,14 +389,3 @@ nav.site ul li {
     background-color: #fff;
     color: #00dd00;
 }
-
-/* Mobile-specific styles */
-@media screen and (max-width: 1000px) {
-    h1 {
-        font-size: 1.4em;  /* Adjust the size as needed to fit mobile */
-        text-align: center;  /* Center the heading on mobile */
-        word-wrap: break-word;  /* Ensure long words wrap if necessary */
-        overflow-wrap: break-word;  /* Prevent overflows */
-    }
-}
-
