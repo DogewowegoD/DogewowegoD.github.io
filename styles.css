@@ -405,7 +405,7 @@ nav.site ul li {
     width: 90%;  /* Stretch across the page */
     max-width: 400px;  /* Limit max width on larger screens */
     font-size: 0.8em;
-    font-family: 'Verdana', sans-serif;  /* Apply the Superpix font */
+    font-family: 'PixelDigivolve', sans-serif;  /* Apply the Superpix font */
     padding: 10px;
     border: none;
     border-bottom: 2px solid #00dd00;  /* Underline instead of full border */
