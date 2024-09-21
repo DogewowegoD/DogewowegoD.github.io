@@ -69,10 +69,10 @@ $(document).ready(function () {
         totalPages = Math.ceil(allData.length / cardsPerPage);
 
         // Initial render of all cards
-        renderCards(allData);
+        renderPage(currentPage, allData);
 
         // Render pagination after fetching data
-        renderPaginationControls();
+        renderPaginationControls(allData.length);
     });
 
     // Search functionality (dynamic filtering)
@@ -82,19 +82,31 @@ $(document).ready(function () {
         // Filter cards based on item number in name
         if (searchTerm !== "") {
             const filteredData = allData.filter(item => item.name.includes(`#${searchTerm}`));
-            renderCards(filteredData);
+            renderPage(1, filteredData);  // Always start with page 1 for filtered results
+
+            // Update pagination based on search results
+            renderPaginationControls(filteredData.length);
         } else {
             // If search is empty, show all cards again
-            renderCards(allData);
+            renderPage(currentPage, allData);
+
+            // Reset pagination to full data set
+            renderPaginationControls(allData.length);
         }
     });
 
     // Pagination logic (adjusts for mobile and desktop)
-    function renderPaginationControls() {
+    function renderPaginationControls(totalItems) {
         const paginationContainer = $('#pagination');
         paginationContainer.empty();
 
+        // Only show pagination if there are more than 100 items
+        if (totalItems <= cardsPerPage) {
+            return;  // No pagination needed
+        }
+
         const maxVisiblePages = $(window).width() <= 768 ? 3 : 10;  // Mobile: 3 visible, Desktop: 10 visible
+        totalPages = Math.ceil(totalItems / cardsPerPage);
         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
@@ -128,22 +140,24 @@ $(document).ready(function () {
         // Add click event to page buttons
         $('.page-btn').off('click').on('click', function () {
             currentPage = $(this).data('page');
-            renderPage(currentPage);
+            renderPage(currentPage, allData);  // Update page when clicked
         });
     }
 
     // Function to render a specific page
-    function renderPage(page) {
+    function renderPage(page, data) {
         currentPage = page;
         const start = (page - 1) * cardsPerPage;
         const end = start + cardsPerPage;
-        const paginatedData = allData.slice(start, end);
+        const paginatedData = data.slice(start, end);
         renderCards(paginatedData);
 
         // Update pagination controls
-        renderPaginationControls();
+        renderPaginationControls(data.length);
     }
 
     // Re-render pagination when window is resized
-    $(window).resize(renderPaginationControls);
+    $(window).resize(function () {
+        renderPaginationControls(allData.length);
+    });
 });
