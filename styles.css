@@ -399,7 +399,7 @@ nav.site ul li {
 #searchBar {
     width: 90%;  /* Stretch across the page */
     max-width: 800px;  /* Limit max width on larger screens */
-    font-size: 1.2em;
+    font-size: 0.8em;
     padding: 10px;
     border: none;
     border-bottom: 2px solid #00dd00;  /* Underline instead of full border */
@@ -413,7 +413,7 @@ nav.site ul li {
 /* Adjust the search bar for mobile */
 @media screen and (max-width: 768px) {
     #searchBar {
-        font-size: 1em;  /* Slightly smaller on mobile */
+        font-size: 0.6em;  /* Slightly smaller on mobile */
         width: 95%;  /* Stretch a bit more on mobile */
     }
 }
