@@ -389,3 +389,31 @@ nav.site ul li {
     background-color: #fff;
     color: #00dd00;
 }
+
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+#searchBar {
+    width: 90%;  /* Stretch across the page */
+    max-width: 800px;  /* Limit max width on larger screens */
+    font-size: 1.2em;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #00dd00;  /* Underline instead of full border */
+    background-color: transparent;  /* No background */
+    color: #00dd00;  /* Text color matches theme */
+    outline: none;  /* Remove default focus outline */
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Adjust the search bar for mobile */
+@media screen and (max-width: 768px) {
+    #searchBar {
+        font-size: 1em;  /* Slightly smaller on mobile */
+        width: 95%;  /* Stretch a bit more on mobile */
+    }
+}
