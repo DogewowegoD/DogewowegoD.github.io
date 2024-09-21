@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=VT323);
 @font-face {
     font-family: 'Superpix';
-    src: url('https://www.fronkcartel.com/assets/font/Superpix-DONATIONWARE.otf') format('opentype');
+    src: url('/fonts/Superpix-DONATIONWARE.otf') format('opentype');
 }
 
 .custom-font {
