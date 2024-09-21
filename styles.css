@@ -4,6 +4,11 @@
     src: url('/fonts/Superpix-DONATIONWARE.otf') format('opentype');
 }
 
+@font-face {
+    font-family: 'PixelDigivolve';
+    src: url('/fonts/Pixel Digivolve.otf') format('opentype');
+}
+
 .custom-font {
     font-family: 'Superpix', sans-serif; /* Fallback to sans-serif if the font doesn't load */
 }
@@ -264,7 +269,7 @@ nav.site ul li {
 }
 
 .card {
-    font-family: 'Verdana', sans-serif;
+    font-family: 'PixelDigivolve', sans-serif;
     background-color: transparent;
     width: 136px;
     height: 200px;  /* Fixed height for all cards */
@@ -319,7 +324,7 @@ nav.site ul li {
     padding: 10px;
     margin: 0 5px;
     cursor: pointer;
-    font-family: 'Verdana', Courier;
+    font-family: 'PixelDigivolve', Courier;
     font-size: 0.5em;  /* Default font size for desktop */
     min-width: 40px;  /* Ensures all buttons, including Prev/Next, are the same width */
     text-align: center;
