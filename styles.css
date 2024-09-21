@@ -321,7 +321,7 @@ nav.site ul li {
     cursor: pointer;
     font-family: 'Verdana', Courier;
     font-size: 0.9em;
-    width: 40px;
+    min-width: 50px;  /* Ensures all buttons, including Prev/Next, are the same width */
     text-align: center;
 }
 
