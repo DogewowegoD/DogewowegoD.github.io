@@ -422,3 +422,34 @@ nav.site ul li {
         color: #00dd00;
     }
 }
+
+/* Search bar styling */
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#searchBar {
+    padding: 10px;
+    font-size: 1em;
+    width: 80%;
+    max-width: 300px;
+    border: 2px solid #00dd00;
+    border-radius: 5px;
+}
+
+#searchButton {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #00dd00;
+    color: #383838;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+#searchButton:hover {
+    background-color: #fff;
+    color: #00dd00;
+}
