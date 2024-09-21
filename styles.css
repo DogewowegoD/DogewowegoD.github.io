@@ -398,7 +398,7 @@ nav.site ul li {
 
 #searchBar {
     width: 90%;  /* Stretch across the page */
-    max-width: 800px;  /* Limit max width on larger screens */
+    max-width: 400px;  /* Limit max width on larger screens */
     font-size: 0.8em;
     padding: 10px;
     border: none;

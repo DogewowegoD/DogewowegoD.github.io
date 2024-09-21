@@ -3,6 +3,7 @@ $(document).ready(function () {
     let currentPage = 1;
     let totalPages = 0;
     let allData = [];  // To store all the card data
+    let currentSearchTerm = '';  // To store the current search term
     const baseUrl1 = 'https://ik.imagekit.io/Cartel/1/';
     const baseUrl2 = 'https://ik.imagekit.io/Cartel/2/';
 
@@ -77,11 +78,11 @@ $(document).ready(function () {
 
     // Search functionality (dynamic filtering)
     $('#searchBar').on('input', function () {
-        const searchTerm = $(this).val().trim();
+        currentSearchTerm = $(this).val().trim();  // Store the current search term
 
         // Filter cards based on item number in name
-        if (searchTerm !== "") {
-            const filteredData = allData.filter(item => item.name.includes(`#${searchTerm}`));
+        if (currentSearchTerm !== "") {
+            const filteredData = allData.filter(item => item.name.includes(`#${currentSearchTerm}`));
             renderPage(1, filteredData);  // Always start with page 1 for filtered results
 
             // Update pagination based on search results
@@ -140,7 +141,15 @@ $(document).ready(function () {
         // Add click event to page buttons
         $('.page-btn').off('click').on('click', function () {
             currentPage = $(this).data('page');
-            renderPage(currentPage, allData);  // Update page when clicked
+            
+            // If searching, render the next page of filtered results
+            if (currentSearchTerm !== "") {
+                const filteredData = allData.filter(item => item.name.includes(`#${currentSearchTerm}`));
+                renderPage(currentPage, filteredData);
+            } else {
+                // Otherwise, render the full dataset
+                renderPage(currentPage, allData);
+            }
         });
     }
 
