@@ -339,7 +339,7 @@ nav.site ul li {
 /* Mobile-specific styles */
 @media screen and (max-width: 1000px) {
     .page-btn {
-        font-size: 0.1em;  /* Smaller font size for mobile */
+        font-size: 0.15em;  /* Smaller font size for mobile */
         padding: 8px;  /* Adjust padding for smaller screens */
         min-width: 40px;  /* Adjust button width for mobile */
     }
