@@ -392,8 +392,8 @@ nav.site ul li {
 
 /* Mobile-specific styles */
 @media screen and (max-width: 768px) {
-    h1, h2, h3, h4, h5, h6 {
-        font-size: 1.2em;  /* Adjust font size for mobile */
+    h1 {
+        font-size: 1.4em;  /* Adjust the size as needed to fit mobile */
         text-align: center;  /* Center the heading on mobile */
         word-wrap: break-word;  /* Ensure long words wrap if necessary */
         overflow-wrap: break-word;  /* Prevent overflows */
