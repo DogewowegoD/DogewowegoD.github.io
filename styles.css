@@ -320,8 +320,8 @@ nav.site ul li {
     margin: 0 5px;
     cursor: pointer;
     font-family: 'Verdana', Courier;
-    font-size: 0.8em;  /* Default font size for desktop */
-    min-width: 50px;  /* Ensures all buttons, including Prev/Next, are the same width */
+    font-size: 0.5em;  /* Default font size for desktop */
+    min-width: 40px;  /* Ensures all buttons, including Prev/Next, are the same width */
     text-align: center;
 }
 
