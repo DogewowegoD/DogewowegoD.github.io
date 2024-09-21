@@ -412,7 +412,7 @@ nav.site ul li {
     nav.site ul li {
         flex-grow: 1;  /* Equal growth for links */
         text-align: center;  /* Center the links */
-        padding: 0px;
+        padding: 10px;
     }
 
     nav.site ul li a {
