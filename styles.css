@@ -320,7 +320,7 @@ nav.site ul li {
     margin: 0 5px;
     cursor: pointer;
     font-family: 'Verdana', Courier;
-    font-size: 0.2em;
+    font-size: 0.5em;  /* Default font size for desktop */
     min-width: 50px;  /* Ensures all buttons, including Prev/Next, are the same width */
     text-align: center;
 }
@@ -334,6 +334,15 @@ nav.site ul li {
     background-color: #fff;
     color: #383838;
     font-weight: bold;
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 1000px) {
+    .page-btn {
+        font-size: 0.1em;  /* Smaller font size for mobile */
+        padding: 8px;  /* Adjust padding for smaller screens */
+        min-width: 40px;  /* Adjust button width for mobile */
+    }
 }
 
 /* Modal overlay */
