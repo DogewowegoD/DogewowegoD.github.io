@@ -393,33 +393,10 @@ nav.site ul li {
 /* Mobile-specific styles */
 @media screen and (max-width: 1000px) {
     h1 {
-        font-size: 0.8em;  /* Adjust the size as needed to fit mobile */
+        font-size: 1.4em;  /* Adjust the size as needed to fit mobile */
         text-align: center;  /* Center the heading on mobile */
         word-wrap: break-word;  /* Ensure long words wrap if necessary */
         overflow-wrap: break-word;  /* Prevent overflows */
-    }
-
-    /* Navigation Styling for Mobile */
-    nav.site ul {
-        display: flex;
-        justify-content: space-around;  /* Equal space between links */
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        width: 100%;  /* Full width for navigation */
-    }
-
-    nav.site ul li {
-        flex-grow: 1;  /* Equal growth for links */
-        text-align: center;  /* Center the links */
-        padding: 10px;
-    }
-
-    nav.site ul li a {
-        display: block;
-        width: 100%;
-        text-decoration: none;
-        color: #00dd00;
     }
 }
 
