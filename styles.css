@@ -375,12 +375,12 @@ nav.site ul li {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #000000;
+    background-color: #363636;
     padding: 20px;
     border-radius: 10px;
     z-index: 101;
     text-align: center;
-    width: 300px;
+    width: 500px;
     max-width: 90%;
 }
 
