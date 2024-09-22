@@ -230,10 +230,11 @@ nav.site ul li {
 }
 
 /* Mobile layout using flexbox */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 950px) {
     .cards-grid {
         display: flex;
         flex-wrap: wrap;  /* Allow cards to wrap onto the next line */
+        grid-gap: 10px 16px;
         justify-content: space-between;  /* Distribute space evenly between cards */
     }
 
