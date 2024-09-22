@@ -389,6 +389,13 @@ nav.site ul li {
     height: 420px;
 }
 
+@media screen and (max-width: 1000px) {
+    .modal-card {
+        width: 210px;
+        height: 210px;
+    }
+}
+
 .close-modal {
     background-color: #000000;
     border: none;
