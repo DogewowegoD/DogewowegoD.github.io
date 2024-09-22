@@ -229,6 +229,9 @@ nav.site ul li {
     grid-template-columns: repeat(10, 1fr);  /* 10 cards per row for larger screens */
     grid-gap: 10px 16px;
     justify-content: center;
+    max-width: 100%;  /* Allow grid to take up the full width of the screen */
+    padding: 0 20px;  /* Add some padding on the sides if needed */
+    margin: 0 auto;  /* Center the grid */
 }
 
 /* Mobile layout using flexbox */
