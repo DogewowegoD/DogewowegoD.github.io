@@ -9,6 +9,7 @@ $(document).ready(function () {
 
     // Function to open the modal with the clicked card's data
     function openModal(item) {
+        $('body').attr('aria-hidden', 'true');
         const modalHtml = `
             <div class="modal-overlay"></div>
             <div class="modal-card">
@@ -23,6 +24,7 @@ $(document).ready(function () {
         // Close the modal when clicking the close button or the overlay
         $('.close-modal, .modal-overlay').click(function () {
             $('.modal-card, .modal-overlay').remove();
+            $('body').attr('aria-hidden', 'false');
         });
     }
 
@@ -77,7 +79,7 @@ $(document).ready(function () {
     });
 
     // Search functionality (dynamic filtering)
-    $('#searchBar').on('input', function () {
+    $('#searchBar').on('input', debounce(function () {
         currentSearchTerm = $(this).val().trim();  // Store the current search term
 
         // Filter cards based on item number in name
@@ -94,12 +96,12 @@ $(document).ready(function () {
             // Reset pagination to full data set
             renderPaginationControls(allData.length);
         }
-    });
+    }, 300));  // 300ms debounce for better performance
 
     // Pagination logic (adjusts for mobile and desktop)
     function renderPaginationControls(totalItems) {
         const paginationContainer = $('#pagination');
-        paginationContainer.empty();
+        paginationContainer.empty();  // Clear the old pagination controls
 
         // Only show pagination if there are more than 100 items
         if (totalItems <= cardsPerPage) {
@@ -159,14 +161,28 @@ $(document).ready(function () {
         const start = (page - 1) * cardsPerPage;
         const end = start + cardsPerPage;
         const paginatedData = data.slice(start, end);
+
+        // Render cards
         renderCards(paginatedData);
 
-        // Update pagination controls
+        // Ensure pagination controls are updated for the filtered data
+        totalPages = Math.ceil(data.length / cardsPerPage);
         renderPaginationControls(data.length);
     }
 
     // Re-render pagination when window is resized
-    $(window).resize(function () {
+    $(window).resize(debounce(function () {
         renderPaginationControls(allData.length);
-    });
+    }, 300));  // Debounce resize event by 300ms
+
+    // Debounce function to avoid excessive calls to search and resize
+    function debounce(func, delay) {
+        let debounceTimer;
+        return function () {
+            const context = this;
+            const args = arguments;
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => func.apply(context, args), delay);
+        };
+    }
 });
