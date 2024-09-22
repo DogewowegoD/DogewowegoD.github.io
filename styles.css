@@ -86,6 +86,16 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;  /* Smaller font size on mobile */
+        word-wrap: break-word;  /* Break long words to fit the screen */
+        overflow-wrap: break-word;  /* Break long words to prevent overflow */
+        text-align: left;  /* Center the text */
+        padding: 0 10px;  /* Add padding to prevent it from touching the edges */
+    }
+}
+
 h1 b, h2 b, h4 b {
     color: white;
 }
