@@ -225,7 +225,7 @@ nav.site ul li {
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);  /* 10 cards per row for larger screens */
-    grid-gap: 10px 16px;
+    grid-gap: 16px 22px;
     justify-content: center;
 }
 
