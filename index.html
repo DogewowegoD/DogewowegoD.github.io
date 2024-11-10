@@ -143,13 +143,17 @@
             background-color: black;
             color: white;
             text-align: center;
-            padding: 0px 0;
+            padding: 2px 0;
             font-size: 1em;
             z-index: 1;
         }
 
         /* Mobile adjustments */
         @media (max-width: 768px) {
+            .video-background {
+                transform: translateY(-10%); /* Adjust the value as needed to shift the video up */
+            }
+
             .centered-container {
                 width: 90%;
             }
