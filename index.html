@@ -76,14 +76,14 @@
             font-family: 'Source Sans Pro', sans-serif;
         }
 
-        /* Fullscreen video background with "contain" to keep more visible */
+        /* Fullscreen video background */
         .video-background {
             position: fixed;
             top: 50%;
             left: 50%;
             width: 100vw;
             height: 100vh;
-            object-fit: contain;
+            object-fit: cover;
             transform: translate(-50%, -50%);
             z-index: -1;
             background-color: black;
@@ -100,7 +100,7 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-            width: 80%; /* Default width */
+            width: 80%;
             max-width: 500px;
         }
 
@@ -142,27 +142,17 @@
             width: 100%;
         }
 
-        /* Responsive styles for mobile */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
-            .video-background {
-                object-fit: cover; /* Ensure video fills the screen on mobile */
-            }
-
             .centered-container {
-                width: 90%; /* Slightly wider on mobile */
+                width: 90%;
             }
-
             .centered-container h2 {
                 font-size: 1.2em;
             }
-
-            .centered-container input[type="text"] {
-                font-size: 0.9em;
-            }
-
+            .centered-container input[type="text"],
             .centered-container button {
                 font-size: 0.9em;
-                padding: 8px 16px;
             }
         }
     </style>
