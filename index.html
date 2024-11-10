@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="icon" type="image/webp" href="favicon.webp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +7,7 @@
     
     <!-- Link to Montserrat Font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/webp" href="favicon.webp">
 
     <!-- Firebase SDKs (using Firebase modular syntax) -->
     <script type="module">
@@ -76,16 +76,17 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* Fullscreen video background with adjusted scaling */
+        /* Fullscreen video background with "contain" to keep more visible */
         .video-background {
             position: fixed;
             top: 50%;
             left: 50%;
             width: 100vw;
             height: 100vh;
-            object-fit: cover;
+            object-fit: contain;
             transform: translate(-50%, -50%);
             z-index: -1;
+            background-color: black;
         }
 
         /* Centered form container */
@@ -94,7 +95,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(128, 128, 128, 0.8); /* Opaque grey background */
+            background-color: rgba(128, 128, 128, 0.8);
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -138,12 +139,28 @@
             bottom: 0;
             width: 100%;
         }
+
+        /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+            .centered-container h2 {
+                font-size: 1.2em;
+            }
+
+            .centered-container input[type="text"] {
+                font-size: 0.9em;
+            }
+
+            .centered-container button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <!-- Video Background -->
-    <video class="video-background" autoplay loop muted>
+    <video class="video-background" autoplay loop muted playsinline>
         <source src="warfronks.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
