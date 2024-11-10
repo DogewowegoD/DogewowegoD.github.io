@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="icon" type="image/webp" href="favicon.webp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WarFronks</title>
+    
+    <!-- Link to Montserrat Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDKs (using Firebase modular syntax) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD9Yi7CIPjTfh34-RisT1DeM2vb7s8_kTQ",
+            authDomain: "warfronks.firebaseapp.com",
+            projectId: "warfronks",
+            storageBucket: "warfronks.firebasestorage.app",
+            messagingSenderId: "632128069284",
+            appId: "1:632128069284:web:c1d8743ad4e1303e13d031"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        function isValidSolanaAddress(address) {
+            const solanaRegex = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+            return solanaRegex.test(address);
+        }
+
+        async function isAddressInDatabase(address) {
+            const addressesRef = collection(db, "addresses");
+            const q = query(addressesRef, where("address", "==", address));
+            const querySnapshot = await getDocs(q);
+            return !querySnapshot.empty;
+        }
+
+        async function saveAddress(solanaAddress) {
+            if (!isValidSolanaAddress(solanaAddress)) {
+                alert("Invalid Solana address format.");
+                return;
+            }
+
+            if (await isAddressInDatabase(solanaAddress)) {
+                alert("This address is already enlisted.");
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "addresses"), { address: solanaAddress });
+                alert('Address saved successfully!');
+            } catch (error) {
+                console.error('Error saving address:', error);
+                alert('Failed to save address');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('enlistForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const solanaAddress = document.querySelector('input[name="solanaAddress"]').value.trim();
+                await saveAddress(solanaAddress);
+            });
+        });
+    </script>
+
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Fullscreen video background with adjusted scaling */
+        .video-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        /* Centered form container */
+        .centered-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(128, 128, 128, 0.8); /* Opaque grey background */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .centered-container h2 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .centered-container input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .centered-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Black bar styling */
+        .black-bar {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <video class="video-background" autoplay loop muted>
+        <source src="warfronks.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Centered Form Container -->
+    <div class="centered-container">
+        <h2>Enlist and serve your fellow Fronk</h2>
+        <form id="enlistForm">
+            <input type="text" name="solanaAddress" placeholder="Enter your Solana address" required>
+            <button type="submit">ENLIST NOW</button>
+        </form>
+    </div>
+
+    <!-- Black Bar Footer -->
+    <div class="black-bar">
+        Copyright © 2024 WarFronks - All Rights Reserved.
+    </div>
+
+</body>
+</html>
