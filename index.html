@@ -151,9 +151,7 @@
         /* Mobile adjustments */
         @media (max-width: 768px) {
             .video-background {
-                width: 100vw;
-                height: 100vw; /* Make video square on mobile */
-                object-fit: contain; /* Ensure the full video is visible */
+                transform: translateY(-7%); /* Adjust the value as needed to shift the video up */
             }
 
             .centered-container {
